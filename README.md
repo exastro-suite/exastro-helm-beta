@@ -1,7 +1,7 @@
 # exastro-helm-beta
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 ![version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-[![Chart Publish](https://github.com/exastro-suite/exastro-helm-beta/actions/workflows/publish.yml/badge.svg)](https://github.com/exastro-suite/exastro-helm-beta/actions/workflows/publish.yml)
+[![Chart Publish](https://github.com/exastro-suite/exastro-helm/actions/workflows/publish.yml/badge.svg)](https://github.com/exastro-suite/exastro-helm/actions/workflows/publish.yml)
 
 
 exastro helm beta is a collection of charts maintained by the exastro community.
@@ -28,3 +28,4 @@ helm repo add exastro-beta https://exastro-suite.github.io/exastro-helm-beta/
 |    **1.0.5**    |    1.4.0    |   2.0.6   |
 |    **1.1.9**    |    1.5.0    |   2.1.0   |
 |    **1.1.10**   |    1.5.1    |   2.1.1   |
+|    **1.1.11**   |    1.5.1    |   2.1.2   |
