@@ -13,8 +13,8 @@
 #   limitations under the License.
 
 apiVersion: v2
-name: exastro-platform
-description: A Helm chart for Exastro Platform. Exastro Platform is common framework for Exastro suite applications.
+name: exastro-agent
+description: A Helm chart for Exastro IT Automation. Exastro IT Automation is an Open Source Framework for digitizing and centrally managing the system configuration.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -24,57 +24,30 @@ description: A Helm chart for Exastro Platform. Exastro Platform is common frame
 # Library charts provide useful utilities or functions for the chart developer. They're included as
 # a dependency of application charts to inject those utilities and functions into the rendering
 # pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: library
+type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 1.7.10
+version: 1.0.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "1.7.0"
+appVersion: "2.3.0"
 
 keywords:
 - exastro
-- exastro-platform
+- exastro-it-automation
 home: https://www.exastro.org/
 icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
 sources:
-- https://github.com/exastro-suite/exastro-platform
+- https://github.com/exastro-suite/exastro-it-automation
 dependencies:
-- name: common
+- name: ita-ag-oase
   version: ^1.x
   condition: common.enabled
-- name: keycloak
-  version: ^1.x
-  condition: keycloak.enabled
-- name: mariadb
-  version: ^1.x
-  condition: mariadb.enabled
-- name: gitlab
-  version: ^1.x
-  condition: gitlab.enabled
-- name: mongo
-  version: ^1.x
-  condition: mongo.enabled
-- name: platform-api
-  version: ^1.x
-  condition: platform-api.enabled
-- name: platform-auth
-  version: ^1.x
-  condition: platform-auth.enabled
-- name: platform-migration
-  version: ^1.x
-  condition: platform-migration.enabled
-- name: platform-web
-  version: ^1.x
-  condition: platform-web.enabled
-- name: platform-job
-  version: ^1.x
-  condition: platform-job.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com
