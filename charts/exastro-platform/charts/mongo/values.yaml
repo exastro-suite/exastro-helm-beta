@@ -53,6 +53,7 @@ serviceAccount:
 
 persistence:
   enabled: false
+  volumeName: "pv-mongo"
   reinstall: false
   accessMode: ReadWriteOnce
   size: 20Gi
