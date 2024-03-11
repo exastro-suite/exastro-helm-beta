@@ -22,6 +22,19 @@ global:
       PLATFORM_WEB_PORT: "8000"
     secret:
       ENCRYPT_KEY: ""
+  pfAuditLogDefinition:
+    name: pf-auditlog
+    persistence:
+      enabled: false
+      reinstall: false
+      accessMode: ReadWriteMany
+      size: 10Gi
+      volumeType: hostPath # e.g.) hostPath or AKS
+      storageClass: "-" # e.g.) azurefile or - (None)
+      # matchLabels: 
+      #   release: "stable"
+      # matchExpressions:
+      #   - {key: environment, operator: In, values: [dev]}
   pfItaDefinition:
     name: pf-ita
     enabled: true
@@ -130,6 +143,7 @@ serviceAccount:
 persistence:
   mountPath:
     storage: /storage
+    auditlog: /var/log/exastro
     homeDir: /home/app_user
     pid:
       path: /var/run_app_user/httpd/pid
