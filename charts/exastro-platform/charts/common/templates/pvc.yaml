@@ -16,13 +16,13 @@
 
 {{/* Custom Exastro Platform auditlog PVC */}}
 {{- define "common.pvc.pf-auditlog" -}}
-{{-   $persistence := .Values.global.pfAuditlogDefinition.persistence -}}
+{{-   $persistence := .Values.global.pfAuditLogDefinition.persistence -}}
 ---
 {{-   if $persistence.enabled }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-{{ .Values.global.pfAuditlogDefinition.name }}
+  name: pvc-{{ .Values.global.pfAuditLogDefinition.name }}
   namespace: {{ $.Release.Namespace }}
   labels: {{ include "common.labels" . | nindent 4 }}
 spec:
@@ -54,7 +54,7 @@ spec:
 {{- end -}}
 
 {{/* Print Exastro Platform auditlog PVC */}}
-{{- $pf_auditlog := default dict .Values.global.pfAuditlogDefinition.persistence -}}
+{{- $pf_auditlog := default dict .Values.global.pfAuditLogDefinition.persistence -}}
 {{- if (default false $pf_auditlog.enabled) -}}
 {{-   include "common.pvc.pf-auditlog" . | nindent 0 -}}
 {{- end -}}

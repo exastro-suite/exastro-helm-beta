@@ -153,18 +153,6 @@ persistence:
       subPath: httpd-socket
     tmp: /tmp
 
-persistence:
-  enabled: true
-  reinstall: false
-  accessMode: ReadWriteMany
-  size: 10Gi
-  volumeType: hostPath # e.g.) hostPath or AKS
-  storageClass: "-" # e.g.) azurefile or - (None)
-  # matchLabels:
-  #   release: "stable"
-  # matchExpressions:
-  #   - {key: environment, operator: In, values: [dev]}
-
 podAnnotations: {}
 
 podSecurityContext: {}

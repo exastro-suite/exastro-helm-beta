@@ -116,9 +116,9 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
         - name: volume-{{ template "platform-auth.name" . }}-auditlog
-          {{- if and .Values.global.pfAuditlogDefinition.persistence.enabled }}
+          {{- if and .Values.global.pfAuditLogDefinition.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: pvc-{{ .Values.global.pfAuditloglDefinition.name }}
+            claimName: pvc-{{ .Values.global.pfAuditLogDefinition.name }}
           {{- else }}
           emptyDir: {}
           {{- end }}

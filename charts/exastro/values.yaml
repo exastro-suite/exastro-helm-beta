@@ -37,6 +37,19 @@ global:
       TZ: "Asia/Tokyo"
     secret:
       ENCRYPT_KEY: ""
+  pfAuditLogDefinition:
+    name: pf-auditlog
+    persistence:
+      enabled: false
+      reinstall: false
+      accessMode: ReadWriteMany
+      size: 10Gi
+      volumeType: hostPath # e.g.) hostPath or AKS
+      storageClass: "-" # e.g.) azurefile or - (None)
+      # matchLabels: 
+      #   release: "stable"
+      # matchExpressions:
+      #   - {key: environment, operator: In, values: [dev]}
   pfDatabaseDefinition:
     config:
       DB_VENDOR: "mariadb"
