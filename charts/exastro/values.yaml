@@ -212,7 +212,7 @@ exastro-it-automation:
   ita-by-conductor-synchronize:
     replicaCount: 1
     extraEnv:
-      EXECUTE_INTERVAL: "3
+      EXECUTE_INTERVAL: "3"
       PLATFORM_API_HOST: "platform-api"
       PLATFORM_API_PORT: "8000"
     image:
