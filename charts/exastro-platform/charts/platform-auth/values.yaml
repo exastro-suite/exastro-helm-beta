@@ -108,6 +108,10 @@ extraEnv:
   PLATFORM_AUTH_PORT: "8000"
   LISTEN_PORT: "8000"
   LISTEN_PORT_PF_MNG: "8001"
+  AUDIT_LOG_ENABLED: "True"
+  AUDIT_LOG_PATH: "exastro-audit.log"
+  AUDIT_LOG_FILE_MAX_BYTE: "100000000"
+  AUDIT_LOG_BACKUP_COUNT: "30"
 
   # Please set the URL to access
   EXTERNAL_URL: ""
