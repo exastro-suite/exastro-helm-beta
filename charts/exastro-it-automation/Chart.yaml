@@ -53,82 +53,82 @@ sources:
 - https://github.com/exastro-suite/exastro-it-automation
 dependencies:
 - name: common
-  version: ^1.x
+  version: ^2.x
   condition: common.enabled
 - name: ita-api-admin
-  version: ^1.x
+  version: ^2.x
   condition: ita-api-admin.enabled
 - name: ita-api-organization
-  version: ^1.x
+  version: ^2.x
   condition: ita-api-organization.enabled
 - name: ita-api-oase-receiver
-  version: ^1.x
+  version: ^2.x
   condition: ita-api-oase-receiver.enabled
 - name: ita-by-ansible-execute
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-ansible-execute.enabled
 - name: ita-by-ansible-legacy-role-vars-listup
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-ansible-legacy-role-vars-listup.enabled
 - name: ita-by-ansible-legacy-vars-listup
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-ansible-legacy-vars-listup.enabled
 - name: ita-by-ansible-pioneer-vars-listup
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-ansible-pioneer-vars-listup.enabled
 - name: ita-by-ansible-towermaster-sync
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-ansible-towermaster-sync.enabled
 - name: ita-by-cicd-for-iac
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-cicd-for-iac.enabled
 - name: ita-by-collector
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-collector.enabled
 - name: ita-by-conductor-regularly
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-conductor-regularly.enabled
 - name: ita-by-conductor-synchronize
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-conductor-synchronize.enabled
 - name: ita-by-excel-export-import
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-excel-export-import.enabled
 - name: ita-by-execinstance-dataautoclean
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-execinstance-dataautoclean.enabled
 - name: ita-by-file-autoclean
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-file-autoclean.enabled
 - name: ita-by-hostgroup-split
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-hostgroup-split.enabled
 - name: ita-by-menu-create
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-menu-create.enabled
 - name: ita-by-menu-export-import
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-menu-export-import.enabled
 - name: ita-by-oase-conclusion
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-oase-conclusion.enabled
 - name: ita-by-terraform-cli-execute
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-terraform-cli-execute.enabled
 - name: ita-by-terraform-cli-vars-listup
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-terraform-cli-vars-listup.enabled
 - name: ita-by-terraform-cloud-ep-execute
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-terraform-cloud-ep-execute.enabled
 - name: ita-by-terraform-cloud-ep-vars-listup
-  version: ^1.x
+  version: ^2.x
   condition: ita-by-terraform-cloud-ep-vars-listup.enabled
 - name: ita-migration
-  version: ^1.x
+  version: ^2.x
   condition: ita-migration.enabled
 - name: ita-web-server
-  version: ^1.x
+  version: ^2.x
   condition: ita-web-server.enabled
 maintainers:
 - name: NEC Corporation
