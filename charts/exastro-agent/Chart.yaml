@@ -47,7 +47,7 @@ sources:
 dependencies:
 - name: ita-ag-oase
   version: ^1.x
-  condition: common.enabled
+  condition: ita-ag-oase.enabled
 maintainers:
 - name: NEC Corporation
   email: contact@exastro.jp.nec.com
