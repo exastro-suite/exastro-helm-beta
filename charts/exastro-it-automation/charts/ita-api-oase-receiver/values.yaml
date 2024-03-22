@@ -212,3 +212,30 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+startupProbe:
+  httpGet:
+    path: /internal-api/health-check/liveness
+    port: port-http
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 30
+
+livenessProbe:
+  httpGet:
+    path: /internal-api/health-check/liveness
+    port: port-http
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /internal-api/health-check/readiness
+    port: port-http
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3

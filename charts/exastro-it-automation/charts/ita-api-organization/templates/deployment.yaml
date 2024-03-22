@@ -94,22 +94,12 @@ spec:
             - name: port-http
               containerPort: {{ .Values.extraEnv.LISTEN_PORT }}
               protocol: TCP
+          startupProbe:
+            {{- toYaml .Values.startupProbe | nindent 12 }}
           livenessProbe:
-            tcpSocket:
-              port: {{ .Values.extraEnv.LISTEN_PORT }}
-            # httpGet:
-            #   path: /
-            #   port: {{ .Values.extraEnv.LISTEN_PORT }}
-            initialDelaySeconds: 5
-            periodSeconds: 10
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            tcpSocket:
-              port: {{ .Values.extraEnv.LISTEN_PORT }}
-            # httpGet:
-            #   path: /
-            #   port: {{ .Values.extraEnv.LISTEN_PORT }}
-            initialDelaySeconds: 5
-            periodSeconds: 10
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
