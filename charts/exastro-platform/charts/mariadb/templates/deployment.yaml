@@ -90,20 +90,22 @@ spec:
               containerPort: {{ .Values.service.port }}
               protocol: TCP
           livenessProbe:
-            tcpSocket:
-              port: {{ .Values.service.port }}
-            # httpGet:
-            #   path: /
-            #   port: {{ .Values.service.port }}
-            initialDelaySeconds: 5
+            exec:
+              command:
+              - healthcheck.sh
+              - --su-mysql
+              - --connect
+              - --innodb_initialized
+            initialDelaySeconds: 30
             periodSeconds: 10
           readinessProbe:
-            tcpSocket:
-              port: {{ .Values.service.port }}
-            # httpGet:
-            #   path: /
-            #   port: {{ .Values.service.port }}
-            initialDelaySeconds: 5
+            exec:
+              command:
+              - healthcheck.sh
+              - --su-mysql
+              - --connect
+              - --innodb_initialized
+            initialDelaySeconds: 30
             periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
