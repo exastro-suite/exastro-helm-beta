@@ -46,7 +46,7 @@ sources:
 - https://github.com/exastro-suite/exastro-it-automation
 dependencies:
 - name: ita-ag-oase
-  version: ^1.x
+  version: ^2.x
   condition: ita-ag-oase.enabled
 maintainers:
 - name: NEC Corporation
