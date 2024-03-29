@@ -194,12 +194,14 @@ mongo:
   databaseCheck: |-
     #!/bin/bash
     i=10
-    echo "HOST: ${MONGO_HOST}"
-    until echo 'db.runCommand("ping").ok' | mongosh mongodb://${MONGO_HOST}:${MONGO_PORT}/test ; do
-      echo `date`": Can not connect to Database."
-      sleep $i
-    done
-    echo `date`": Completely connect to Database."
+    if  [ -n "${MONGO_HOST}" ]; then
+      echo "HOST: ${MONGO_HOST}"
+      until echo 'db.runCommand("ping").ok' | mongosh mongodb://${MONGO_HOST}:${MONGO_PORT}/test ; do
+        echo `date`": Can not connect to Database."
+        sleep $i
+      done
+      echo `date`": Completely connect to Database."
+    fi
     exit 0
 
   securityContext:
