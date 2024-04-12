@@ -22,6 +22,19 @@ global:
       PLATFORM_WEB_PORT: "8000"
     secret:
       ENCRYPT_KEY: ""
+  pfAuditLogDefinition:
+    name: pf-auditlog
+    persistence:
+      enabled: false
+      reinstall: false
+      accessMode: ReadWriteMany
+      size: 10Gi
+      volumeType: hostPath # e.g.) hostPath or AKS
+      storageClass: "-" # e.g.) azurefile or - (None)
+      # matchLabels:
+      #   release: "stable"
+      # matchExpressions:
+      #   - {key: environment, operator: In, values: [dev]}
   pfItaDefinition:
     name: pf-ita
     enabled: true
@@ -95,6 +108,10 @@ extraEnv:
   PLATFORM_AUTH_PORT: "8000"
   LISTEN_PORT: "8000"
   LISTEN_PORT_PF_MNG: "8001"
+  AUDIT_LOG_ENABLED: "True"
+  AUDIT_LOG_PATH: "exastro-audit.log"
+  AUDIT_LOG_FILE_MAX_BYTE: "100000000"
+  AUDIT_LOG_BACKUP_COUNT: "30"
 
   # Please set the URL to access
   EXTERNAL_URL: ""
@@ -130,6 +147,7 @@ serviceAccount:
 persistence:
   mountPath:
     storage: /storage
+    auditlog: /var/log/exastro
     homeDir: /home/app_user
     pid:
       path: /var/run_app_user/httpd/pid
@@ -206,3 +224,30 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+startupProbe:
+  httpGet:
+    path: /health-check/liveness
+    port: port-http
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 30
+
+livenessProbe:
+  httpGet:
+    path: /health-check/liveness
+    port: port-http
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /health-check/readiness
+    port: port-http
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3

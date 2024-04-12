@@ -13,10 +13,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 */}}
-
 {{- if .Values.enabled -}}
+{{- $highAvailability := gt (int .Values.replicaCount) 1 -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ template "keycloak.name" . }}
   namespace: {{ .Release.Namespace }}
@@ -29,6 +29,10 @@ spec:
   selector:
     matchLabels:
       {{- include "keycloak.selectorLabels" . | nindent 6 }}
+  serviceName: {{ template "keycloak.name" . }}-headless
+  podManagementPolicy: Parallel
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -82,7 +86,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          args: ["start-dev"]
+          command: ["bash", "/scripts/startup.sh"]
           env:
           - name: TZ
             valueFrom:
@@ -128,10 +132,21 @@ spec:
             value: "passthrough"
           - name: KC_HTTP_RELATIVE_PATH
             value: "/auth"
+          - name: KC_HTTP_ENABLED
+            value: "true"
+          - name: KC_HOSTNAME_STRICT
+            value: "false"
+          - name: JAVA_OPTS_APPEND
+            value: "-Djgroups.dns.query={{ template "keycloak.name" . }}-headless.{{ .Release.Namespace }}.svc"
           ports:
             - name: port-http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          {{- if $highAvailability }}
+            - name: jgroups
+              containerPort: 7600
+              protocol: TCP
+          {{- end }}
           livenessProbe:
             tcpSocket:
               port: {{ .Values.service.port }}
@@ -150,6 +165,18 @@ spec:
             periodSeconds: 30
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: {{ template "keycloak.name" . }}-config
+              mountPath: /scripts/startup.sh
+              subPath: startup.sh
+            - name: {{ template "keycloak.name" . }}-config
+              mountPath: /opt/keycloak/conf/cache-ispn-exastro-platform.xml
+              subPath: cache-ispn-exastro-platform.xml
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: {{ template "keycloak.name" . }}-config
+          configMap:
+            name: {{ template "keycloak.name" . }}-config
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

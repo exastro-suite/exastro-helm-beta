@@ -63,7 +63,7 @@ global:
       MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
 
 extraEnv:
-  EXECUTE_INTERVAL: "10"
+  EXECUTE_INTERVAL: "3"
   PLATFORM_API_HOST: "platform-api"
   PLATFORM_API_PORT: "8000"
 
