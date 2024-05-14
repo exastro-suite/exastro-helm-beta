@@ -128,12 +128,28 @@ spec:
               secretKeyRef:
                 name: platform-secret-keycloak
                 key: KEYCLOAK_DB_PASSWORD
-          - name: KC_HTTP_ENABLED
-            value: "true"
-          - name: KC_HOSTNAME_STRICT
-            value: "false"
+          {{- range $define := .Values.global -}}
+          {{-   if and $define.enabled $define.config -}}
+          {{-     if or (eq $define.name "proxy-global") -}}
+          {{-       range $config, $value := $define.config }}
+          - name: {{ $config }}
+            valueFrom:
+              configMapKeyRef:
+                name: platform-params-{{ $define.name }}
+                key: {{ $config }}
+          {{-       end -}}
+          {{-     end -}}
+          {{-   end -}}
+          {{- end -}}
+          {{ range $config, $value := .Values.extraEnv }}
+          - name: {{ $config }}
+            valueFrom:
+              configMapKeyRef:
+                name: params-{{ template "keycloak.name" $ }}
+                key: {{ $config }}
+          {{- end }}
           - name: JAVA_OPTS_APPEND
-            value: "-Djgroups.dns.query={{ template "keycloak.name" . }}-headless.{{ .Release.Namespace }}.svc"
+            value: "-Djgroups.dns.query={{ template "keycloak.name" . }}-headless.{{ .Release.Namespace }}.svc {{ .Values.extraJavaOpts }}"
           ports:
             - name: port-http
               containerPort: {{ .Values.service.port }}

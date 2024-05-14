@@ -28,6 +28,34 @@ spec:
   securityContext:
     {{- toYaml .Values.podSecurityContext | nindent 4 }}
   initContainers:
+    - name: remove-volumes
+      securityContext:
+        {{- toYaml .Values.securityContext | nindent 8 }}
+      image: "{{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}"
+      imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
+      command: ["sh", "-c"]
+      args:
+        - |
+          {{- if .Values.global.pfAuditLogDefinition.persistence.reinstall }}
+          echo "Removing data for Exastro AuditLog persistence..."
+          rm -rf *
+          {{- else }}
+          echo "Leave data for Exastro AuditLog persistence."
+          {{- end }}
+      volumeMounts:
+        - name: volume-{{ template "platform-migration.name" . }}-auditlog
+          mountPath: {{ .Values.volumeMounts.mountPath.auditlog }}
+    - name: setup-volumes
+      command: ["sh", "-c"]
+      args:
+        - |
+          chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.volumeMounts.mountPath.auditlog }}/ || true"
+          chown {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} {{ .Values.volumeMounts.mountPath.auditlog }}/* || true"
+      image: {{ .Values.initContainerImage.repository }}:{{ .Values.initContainerImage.tag | default "latest" }}
+      imagePullPolicy: {{ .Values.initContainerImage.pullPolicy }}
+      volumeMounts:
+        - name: volume-{{ template "platform-migration.name" . }}-auditlog
+          mountPath: {{ .Values.volumeMounts.mountPath.auditlog }}
     - name: {{ template "platform-migration.name" . }}-db-main
       securityContext:
         {{- toYaml .Values.securityContext | nindent 8 }}
@@ -128,6 +156,14 @@ spec:
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   restartPolicy: OnFailure
+  volumes:
+    - name: volume-{{ template "platform-migration.name" . }}-auditlog
+      {{- if and .Values.global.pfAuditLogDefinition.persistence.enabled }}
+      persistentVolumeClaim:
+        claimName: pvc-{{ .Values.global.pfAuditLogDefinition.name }}
+      {{- else }}
+      emptyDir: {}
+      {{- end }}
   {{- with .Values.nodeSelector }}
   nodeSelector:
     {{- toYaml . | nindent 4 }}
