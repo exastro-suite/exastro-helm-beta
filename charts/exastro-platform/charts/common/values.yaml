@@ -101,3 +101,10 @@ global:
     secret:
       MONGO_ADMIN_USER: "admin"
       MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
+  proxyDefinition:
+    name: proxy-global
+    enabled: false
+    config:
+      HTTP_PROXY: ""
+      HTTPS_PROXY: ""
+      NO_PROXY: "127.0.0.1,localhost,platform-auth,platform-api"
