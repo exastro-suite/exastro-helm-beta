@@ -473,6 +473,9 @@ exastro-platform:
       repository: "docker.io/exastro/keycloak"
       tag: ""
       pullPolicy: IfNotPresent
+    extraEnv:
+      # If you use Azure MySQL, add options like below
+      # KC_DB_URL_PROPERTIES: "?useSSL=false"
     resources: {}
       # requests:
       #   memory: "256Mi"
