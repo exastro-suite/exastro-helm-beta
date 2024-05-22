@@ -29,7 +29,7 @@ data:
   cache-ispn-exastro-platform.xml: |
 {{ .Values.keycloakConfig.cacheIspnXml | indent 4 }}
 
-{{-   if .Values.extraEnv -}}
+{{-   if .Values.extraEnv }}
 ---
 apiVersion: v1
 kind: ConfigMap
