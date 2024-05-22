@@ -41,7 +41,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-extraEnv: []
+extraEnv:
+  # If you use Azure MySQL, add options like below
+  # KC_DB_URL_PROPERTIES: "?useSSL=false"
 
 extraJavaOpts: "-Xms256m -Xmx256m"
 
