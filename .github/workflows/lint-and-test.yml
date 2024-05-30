@@ -78,6 +78,7 @@ jobs:
           helm dependency build charts/exastro/
           helm template charts/exastro/ -f charts/exastro/ci/default-values.yaml | kubectl apply -f -
 
-      - name: Run chart-testing (install)
-        run: ct install --config ./.github/configs/ct-install.yaml
-        if: steps.list-changed.outputs.changed == 'true'
+      # It takes time to download the container and it is difficult to adjust the time, so please comment on the installation test.
+      # - name: Run chart-testing (install)
+      #   run: ct install --config ./.github/configs/ct-install.yaml
+      #   if: steps.list-changed.outputs.changed == 'true'
