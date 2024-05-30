@@ -78,6 +78,10 @@ jobs:
           helm dependency build charts/exastro/
           helm template charts/exastro/ -f charts/exastro/ci/default-values.yaml | kubectl apply -f -
 
+      - name: dry-run test
+        run: |
+          helm install exastro --dry-run --create-namespace -n exastro charts/exastro/ -f charts/exastro/ci/default-values.yaml
+
       # It takes time to download the container and it is difficult to adjust the time, so please comment on the installation test.
       # - name: Run chart-testing (install)
       #   run: ct install --config ./.github/configs/ct-install.yaml
