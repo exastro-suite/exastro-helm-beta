@@ -24,6 +24,7 @@ global:
     secret:
       ENCRYPT_KEY: ""
     persistence:
+      enabled: false
       reinstall: false
       accessMode: ReadWriteMany
       size: 10Gi
