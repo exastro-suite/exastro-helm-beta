@@ -83,6 +83,13 @@ global:
     secret:
       MONGO_ADMIN_USER: "admin"
       MONGO_ADMIN_PASSWORD: "Ch@ngeMeMGAdm"
+  proxyDefinition:
+    name: proxy-global
+    enabled: false
+    config:
+      HTTP_PROXY: ""
+      HTTPS_PROXY: ""
+      NO_PROXY: "127.0.0.1,localhost,platform-auth,platform-api,ita-api-admin,ita-api-organization,ita-api-oase-receiver"
 
 exastro-it-automation:
   ita-api-admin:
@@ -466,6 +473,9 @@ exastro-platform:
       repository: "docker.io/exastro/keycloak"
       tag: ""
       pullPolicy: IfNotPresent
+    extraEnv:
+      # If you use Azure MySQL, add options like below
+      # KC_DB_URL_PROPERTIES: "?useSSL=false"
     resources: {}
       # requests:
       #   memory: "256Mi"

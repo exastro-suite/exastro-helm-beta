@@ -1,6 +1,15 @@
 # Default values for keycloak.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+global:
+  proxyDefinition:
+    name: proxy-global
+    enabled: false
+    config:
+      HTTP_PROXY: ""
+      HTTPS_PROXY: ""
+      NO_PROXY: "127.0.0.1,localhost,platform-auth,platform-api"
+
 enabled: true
 
 replicaCount: 1
@@ -31,6 +40,12 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+extraEnv:
+  # If you use Azure MySQL, add options like below
+  # KC_DB_URL_PROPERTIES: "?useSSL=false"
+
+extraJavaOpts: "-Xms256m -Xmx256m"
 
 serviceAccount:
   # Specifies whether a service account should be created
