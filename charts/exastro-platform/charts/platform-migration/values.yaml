@@ -22,6 +22,19 @@ global:
       PLATFORM_WEB_PORT: "8000"
     secret:
       ENCRYPT_KEY: ""
+  pfAuditLogDefinition:
+    name: pf-auditlog
+    persistence:
+      enabled: false
+      reinstall: false
+      accessMode: ReadWriteMany
+      size: 10Gi
+      volumeType: hostPath # e.g.) hostPath or AKS
+      storageClass: "-" # e.g.) azurefile or - (None)
+      # matchLabels:
+      #   release: "stable"
+      # matchExpressions:
+      #   - {key: environment, operator: In, values: [dev]}
   pfItaDefinition:
     name: pf-ita
     enabled: true
@@ -91,7 +104,11 @@ global:
 
 extraEnv: {}
 
-replicaCount: 1
+initContainerImage:
+  repository: "registry.access.redhat.com/ubi8/ubi-init"
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
 
 image:
   repository: ""
@@ -113,6 +130,11 @@ serviceAccount:
   name: ""
 
 persistence: {}
+
+volumeMounts:
+  mountPath:
+    auditlog: /var/log/exastro
+
 
 podAnnotations: {}
 

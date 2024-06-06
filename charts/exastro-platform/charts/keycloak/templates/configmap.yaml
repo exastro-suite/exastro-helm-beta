@@ -28,4 +28,16 @@ data:
 {{ .Values.keycloakConfig.startupSh | indent 4 }}
   cache-ispn-exastro-platform.xml: |
 {{ .Values.keycloakConfig.cacheIspnXml | indent 4 }}
+
+{{-   if .Values.extraEnv }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: params-{{ template "keycloak.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "keycloak.labels" . | nindent 4 }}
+data: {{ toYaml .Values.extraEnv | nindent 2 }}
+{{-   end -}}
 {{- end -}}

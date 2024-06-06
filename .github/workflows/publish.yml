@@ -40,10 +40,6 @@ jobs:
         with:
           version: v3.10.1 # Also update in lint-and-test.yaml
 
-      # - name: Add dependency chart repos
-      #   run: |
-      #     helm repo add exastro-dev https://eiji-nakahashi.github.io/exastro-helm/
-
       - name: Configure Git
         run: |
           git config user.name "$GITHUB_ACTOR"
