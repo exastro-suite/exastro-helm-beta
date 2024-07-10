@@ -77,7 +77,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-database")}}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
@@ -103,6 +103,16 @@ spec:
             secretKeyRef:
               name: platform-secret-keycloak
               key: SYSTEM_ADMIN_PASSWORD
+        - name: KEYCLOAK_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-keycloak
+              key: KEYCLOAK_DB_USER
+        - name: KEYCLOAK_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-keycloak
+              key: KEYCLOAK_DB_PASSWORD
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   containers:
@@ -127,7 +137,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret -}}
-        {{-     if or (eq $define.name "pf-global") (eq $define.name "keycloak") (eq $define.name "pf-database")}}
+        {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-database")}}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
@@ -153,6 +163,16 @@ spec:
             secretKeyRef:
               name: platform-secret-keycloak
               key: SYSTEM_ADMIN_PASSWORD
+        - name: KEYCLOAK_DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-keycloak
+              key: KEYCLOAK_DB_USER
+        - name: KEYCLOAK_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: platform-secret-keycloak
+              key: KEYCLOAK_DB_PASSWORD
       resources:
         {{- toYaml .Values.resources | nindent 8 }}
   restartPolicy: OnFailure
