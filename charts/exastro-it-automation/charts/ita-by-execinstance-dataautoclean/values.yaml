@@ -184,6 +184,6 @@ database:
     runAsNonRoot: true
 
 schedule: "02 00 * * *"
-successfulJobsHistoryLimit: 30
-failedJobsHistoryLimit: 30
+successfulJobsHistoryLimit: 3
+failedJobsHistoryLimit: 3
 backoffLimit: 0

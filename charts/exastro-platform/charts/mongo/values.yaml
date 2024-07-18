@@ -153,3 +153,23 @@ affinity:
           values:
           - mongo
       topologyKey: kubernetes.io/hostname
+
+livenessProbe:
+  tcpSocket:
+    port: port-mongo
+  # httpGet:
+  #   path: /
+  #   port: port-mongo
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 3
+
+readinessProbe:
+  tcpSocket:
+    port: port-mongo
+  # httpGet:
+  #   path: /
+  #   port: port-mongo
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 3

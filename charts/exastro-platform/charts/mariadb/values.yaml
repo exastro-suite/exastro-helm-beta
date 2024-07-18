@@ -111,3 +111,25 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+livenessProbe:
+  exec:
+    command:
+    - healthcheck.sh
+    - --su-mysql
+    - --connect
+    - --innodb_initialized
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 3
+
+readinessProbe:
+  exec:
+    command:
+    - healthcheck.sh
+    - --su-mysql
+    - --connect
+    - --innodb_initialized
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 3

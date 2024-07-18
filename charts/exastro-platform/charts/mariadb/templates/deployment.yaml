@@ -89,24 +89,14 @@ spec:
             - name: port-mysql
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          {{- if .Values.livenessProbe }}
           livenessProbe:
-            exec:
-              command:
-              - healthcheck.sh
-              - --su-mysql
-              - --connect
-              - --innodb_initialized
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.readinessProbe }}
           readinessProbe:
-            exec:
-              command:
-              - healthcheck.sh
-              - --su-mysql
-              - --connect
-              - --innodb_initialized
-            initialDelaySeconds: 30
-            periodSeconds: 10
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
