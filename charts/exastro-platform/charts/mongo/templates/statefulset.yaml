@@ -23,8 +23,6 @@ metadata:
   labels:
     {{- include "mongo.labels" . | nindent 4 }}
 spec:
-  strategy:
-    type: Recreate
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
