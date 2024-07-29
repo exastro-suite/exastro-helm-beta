@@ -96,14 +96,22 @@ spec:
           - name: port-mongo
             containerPort: {{ .Values.service.port }}
             protocol: TCP
-        {{- if .Values.livenessProbe }}
         livenessProbe:
-          {{- toYaml .Values.livenessProbe | nindent 10 }}
-        {{- end }}
-        {{- if .Values.readinessProbe }}
+          tcpSocket:
+            port: {{ .Values.service.port }}
+          # httpGet:
+          #   path: /
+          #   port: {{ .Values.service.port }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
         readinessProbe:
-          {{- toYaml .Values.readinessProbe | nindent 10 }}
-        {{- end }}
+          tcpSocket:
+            port: {{ .Values.service.port }}
+          # httpGet:
+          #   path: /
+          #   port: {{ .Values.service.port }}
+          initialDelaySeconds: 5
+          periodSeconds: 10
       volumes:
         - name: mongo-server-conf
           configMap:
