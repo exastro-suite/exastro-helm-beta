@@ -78,8 +78,14 @@ spec:
                   name: params-{{ template "platform-job.name" $ }}
                   key: {{ $config }}
             {{- end }}
+          volumeMounts:
+            - name: volume-{{ template "platform-job.name" . }}-tmp
+              mountPath: {{ .Values.persistence.mountPath.tmp }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: volume-{{ template "platform-job.name" . }}-tmp
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
