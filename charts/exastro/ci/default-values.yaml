@@ -413,6 +413,20 @@ exastro-platform:
             - path: /
               pathType: Prefix
               backend: "httpMng"
+      tls: []
+        # - secretName: chart-example-tls
+        #   hosts:
+        #     - chart-example.local
+      secrets: []
+        # - name: chart-example-tls
+        #   certificate: |-
+        #     -----BEGIN CERTIFICATE-----
+        #     ...
+        #     -----END CERTIFICATE-----
+        #   key: |-
+        #     -----BEGIN PRIVATE KEY-----
+        #     ...
+        #     -----END PRIVATE KEY-----
     service:
       type: ClusterIP
       # http:
