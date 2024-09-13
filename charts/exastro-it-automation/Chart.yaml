@@ -64,6 +64,9 @@ dependencies:
 - name: ita-api-oase-receiver
   version: ^2.x
   condition: ita-api-oase-receiver.enabled
+- name: ita-api-ansible-execution-receiver
+  version: ^2.x
+  condition: ita-api-ansible-execution-receiver.enabled
 - name: ita-by-ansible-execute
   version: ^2.x
   condition: ita-by-ansible-execute.enabled
