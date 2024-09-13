@@ -89,7 +89,7 @@ global:
     config:
       HTTP_PROXY: ""
       HTTPS_PROXY: ""
-      NO_PROXY: "127.0.0.1,localhost,platform-auth,platform-api,ita-api-admin,ita-api-organization,ita-api-oase-receiver"
+      NO_PROXY: "127.0.0.1,localhost,platform-auth,platform-api,ita-api-admin,ita-api-organization,ita-api-oase-receiver,ita-api-ansible-execution-receiver"
 
 exastro-it-automation:
   ita-api-admin:
@@ -116,6 +116,17 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "docker.io/exastro/exastro-it-automation-api-oase-receiver"
+      tag: ""
+      pullPolicy: IfNotPresent
+    extraEnv:
+      LISTEN_PORT: "8000"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+
+  ita-api-ansible-execution-receiver:
+    replicaCount: 1
+    image:
+      repository: "docker.io/exastro/exastro-it-automation-api-ansible-execution-receiver"
       tag: ""
       pullPolicy: IfNotPresent
     extraEnv:

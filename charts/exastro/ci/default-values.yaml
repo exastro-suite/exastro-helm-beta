@@ -106,9 +106,9 @@ exastro-it-automation:
           # ROLES: "_ws_admin"
           EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
         secret:
-          USERNAME: "admin"
-          PASSWORD: "sample-password"
-          # USER_ID: "user01"
+          REFRESH_TOKEN: "change-this-token"
+          # USERNAME: "admin"
+          # PASSWORD: "sample-password"
         resources: {}
           # requests:
           #   memory: "64Mi"
@@ -141,6 +141,17 @@ exastro-it-automation:
     replicaCount: 1
     image:
       repository: "docker.io/exastro/exastro-it-automation-api-oase-receiver"
+      tag: ""
+      pullPolicy: IfNotPresent
+    extraEnv:
+      LISTEN_PORT: "8000"
+      PLATFORM_API_HOST: "platform-api"
+      PLATFORM_API_PORT: "8000"
+
+  ita-api-ansible-execution-receiver:
+    replicaCount: 1
+    image:
+      repository: "docker.io/exastro/exastro-it-automation-api-ansible-execution-receiver"
       tag: ""
       pullPolicy: IfNotPresent
     extraEnv:
