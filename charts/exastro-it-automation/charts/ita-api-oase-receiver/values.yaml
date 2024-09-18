@@ -1,4 +1,4 @@
-# Default values for ita-by-ansible-execute.
+# Default values for ita-api-oase-receiver.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 global:
