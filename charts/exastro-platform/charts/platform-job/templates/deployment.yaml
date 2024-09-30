@@ -44,6 +44,37 @@ spec:
       serviceAccountName: {{ include "platform-job.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: database-alive-check
+          securityContext:
+            {{- toYaml .Values.database.securityContext | nindent 12 }}
+          image: "{{ .Values.database.initContainerImage.repository }}:{{ .Values.database.initContainerImage.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.database.initContainerImage.pullPolicy }}
+          command: ["sh", "-c"]
+          args:
+            - |
+              {{- .Values.database.databaseCheck | nindent 14 }}
+          env:
+            {{- range $define := .Values.global -}}
+            {{-   range $config, $value := $define.config }}
+            {{-     if or (eq $define.name "pf-global") (eq $define.name "pf-database") }}
+            - name: {{ $config }}
+              valueFrom:
+                configMapKeyRef:
+                  name: platform-params-{{ $define.name }}
+                  key: {{ $config }}
+            {{-     end -}}
+            {{-   end -}}
+            {{-   range $secret, $value := $define.secret }}
+            {{-     if or (eq $define.name "pf-database") }}
+            - name: {{ $secret }}
+              valueFrom:
+                secretKeyRef:
+                  name: platform-secret-{{ $define.name }}
+                  key: {{ $secret }}
+            {{-     end }}
+            {{-   end }}
+            {{- end }}
       containers:
         - name: {{ template "platform-job.name" . }}
           securityContext:
@@ -83,6 +114,10 @@ spec:
               mountPath: {{ .Values.persistence.mountPath.tmp }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          startupProbe:
+            {{- toYaml .Values.startupProbe | nindent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
       volumes:
         - name: volume-{{ template "platform-job.name" . }}-tmp
           emptyDir: {}
