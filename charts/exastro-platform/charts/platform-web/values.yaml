@@ -38,6 +38,9 @@ global:
       ITA_API_OASE_RECEIVER_PROTOCOL: "http"
       ITA_API_OASE_RECEIVER_HOST: "ita-api-oase-receiver"
       ITA_API_OASE_RECEIVER_PORT: "8000"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_PROTOCOL: "http"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_HOST: "ita-api-ansible-execution-receiver"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_PORT: "8000"
   pfDatabaseDefinition:
     name: pf-database
     enabled: true
@@ -160,9 +163,19 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+  secrets: []
+    # - name: chart-example-tls
+    #   certificate: |-
+    #     -----BEGIN CERTIFICATE-----
+    #     ...
+    #     -----END CERTIFICATE-----
+    #   key: |-
+    #     -----BEGIN PRIVATE KEY-----
+    #     ...
+    #     -----END PRIVATE KEY-----
 
 resources: {}
   # requests:

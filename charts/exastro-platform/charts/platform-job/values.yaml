@@ -38,6 +38,9 @@ global:
       ITA_API_OASE_RECEIVER_PROTOCOL: "http"
       ITA_API_OASE_RECEIVER_HOST: "ita-api-oase-receiver"
       ITA_API_OASE_RECEIVER_PORT: "8000"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_PROTOCOL: "http"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_HOST: "ita-api-ansible-execution-receiver"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_PORT: "8000"
   pfDatabaseDefinition:
     name: pf-database
     enabled: true
@@ -143,7 +146,9 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
-persistence: {}
+persistence:
+  mountPath:
+    tmp: /tmp
 
 podAnnotations: {}
 
@@ -174,9 +179,19 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+  secrets: []
+    # - name: chart-example-tls
+    #   certificate: |-
+    #     -----BEGIN CERTIFICATE-----
+    #     ...
+    #     -----END CERTIFICATE-----
+    #   key: |-
+    #     -----BEGIN PRIVATE KEY-----
+    #     ...
+    #     -----END PRIVATE KEY-----
 
 resources: {}
   # requests:
@@ -198,3 +213,51 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+database:
+  initContainerImage:
+    repository: "docker.io/mariadb"
+    tag: "10.9"
+    pullPolicy: IfNotPresent
+
+  imagePullSecrets: []
+
+  databaseCheck: |-
+    #!/bin/bash
+    i=10
+    echo "HOST: ${DB_HOST}"
+    until mysqlcheck --host=${DB_HOST} --user=${DB_USER} --password=${DB_PASSWORD} ${DB_DATABASE} --silent; do
+      echo `date`": Can not connect to Database."
+      sleep $i
+    done
+    echo `date`": Completely connect to Database."
+    exit 0
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
+
+startupProbe:
+  exec:
+    command:
+      - sh
+      - -c
+      - test "$(cat /tmp/liveness 2>/dev/null || echo 0)" -gt "$(($(date +%s) - 5))"
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 30
+
+livenessProbe:
+  exec:
+    command:
+      - sh
+      - -c
+      - test "$(cat /tmp/liveness 2>/dev/null || echo 0)" -gt "$(($(date +%s) - 5))"
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
