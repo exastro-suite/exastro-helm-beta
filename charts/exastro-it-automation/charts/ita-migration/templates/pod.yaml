@@ -91,7 +91,7 @@ spec:
       env:
         {{- range $define := .Values.global -}}
         {{-   range $config, $value := $define.config }}
-        {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") (eq $define.name "mongo") }}
+        {{-     if or (eq $define.name "ita-global") (eq $define.name "ita-database") }}
         - name: {{ $config }}
           valueFrom:
             configMapKeyRef:
@@ -100,7 +100,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret }}
-        {{-     if or (eq $define.name "ita-database") (eq $define.name "mongo") }}
+        {{-     if or (eq $define.name "ita-database") }}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
@@ -129,7 +129,7 @@ spec:
       env:
         {{- range $define := .Values.global -}}
         {{-   range $config, $value := $define.config }}
-        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") }}
+        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") (eq $define.name "mongo") }}
         - name: {{ $config }}
           valueFrom:
             configMapKeyRef:
@@ -138,7 +138,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret }}
-        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") }}
+        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") (eq $define.name "mongo") }}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
