@@ -167,3 +167,31 @@ platform:
     done
     echo `date`": Completely connect to Platform."
     exit 0
+
+mongo:
+  initContainerImage:
+    repository: "docker.io/mongo"
+    tag: "6.0.7"
+    pullPolicy: IfNotPresent
+
+  imagePullSecrets: []
+
+  livenessCheck: |-
+    #!/bin/bash
+    i=10
+    if  [ -n "${MONGO_HOST}" ]; then
+      echo "HOST: ${MONGO_HOST}"
+      until echo 'db.runCommand("ping").ok' | mongosh mongodb://${MONGO_HOST}:${MONGO_PORT}/test ; do
+        echo `date`": Can not connect to Mongo."
+        sleep $i
+      done
+      echo `date`": Completely connect to Mongo."
+    fi
+    exit 0
+
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    runAsNonRoot: true
