@@ -116,6 +116,36 @@ spec:
               name: params-{{ template "ita-migration.name" $ }}
               key: {{ $config }}
         {{- end }}
+    - name: mongo-alive-check
+      securityContext:
+        {{- toYaml .Values.mongo.securityContext | nindent 8 }}
+      image: "{{ .Values.mongo.initContainerImage.repository }}:{{ .Values.mongo.initContainerImage.tag | default "latest" }}"
+      imagePullPolicy: {{ .Values.mongo.initContainerImage.pullPolicy }}
+      command: ["sh", "-c"]
+      args:
+        - |
+          {{- .Values.mongo.livenessCheck | nindent 10 }}
+      env:
+        {{- range $define := .Values.global -}}
+        {{-   range $config, $value := $define.config }}
+        {{-     if or (eq $define.name "ita-global") (eq $define.name "mongo") }}
+        - name: {{ $config }}
+          valueFrom:
+            configMapKeyRef:
+              name: ita-params-{{ $define.name }}
+              key: {{ $config }}
+        {{-     end -}}
+        {{-   end -}}
+        {{-   range $secret, $value := $define.secret }}
+        {{-     if or (eq $define.name "mongo")}}
+        - name: {{ $secret }}
+          valueFrom:
+            secretKeyRef:
+              name: ita-secret-{{ $define.name }}
+              key: {{ $secret }}
+        {{-     end }}
+        {{-   end }}
+        {{- end }}
   containers:
     - name: {{ template "ita-migration.name" . }}
       securityContext:
@@ -129,7 +159,7 @@ spec:
       env:
         {{- range $define := .Values.global -}}
         {{-   range $config, $value := $define.config }}
-        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") }}
+        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") (eq $define.name "mongo") }}
         - name: {{ $config }}
           valueFrom:
             configMapKeyRef:
@@ -138,7 +168,7 @@ spec:
         {{-     end -}}
         {{-   end -}}
         {{-   range $secret, $value := $define.secret }}
-        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") }}
+        {{-     if or (eq $define.name "ita-global") (eq $define.name "gitlab") (eq $define.name "ita-database") (eq $define.name "mongo") }}
         - name: {{ $secret }}
           valueFrom:
             secretKeyRef:
