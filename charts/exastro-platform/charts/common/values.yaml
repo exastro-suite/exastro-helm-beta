@@ -31,7 +31,7 @@ global:
       size: 10Gi
       volumeType: hostPath # e.g.) hostPath or AKS
       storageClass: "-" # e.g.) azurefile or - (None)
-      # matchLabels: 
+      # matchLabels:
       #   release: "stable"
       # matchExpressions:
       #   - {key: environment, operator: In, values: [dev]}
@@ -51,6 +51,9 @@ global:
       ITA_API_OASE_RECEIVER_PROTOCOL: "http"
       ITA_API_OASE_RECEIVER_HOST: "ita-api-oase-receiver"
       ITA_API_OASE_RECEIVER_PORT: "8000"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_PROTOCOL: "http"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_HOST: "ita-api-ansible-execution-receiver"
+      ITA_API_ANSIBLE_EXECUTION_RECEIVER_PORT: "8000"
   pfDatabaseDefinition:
     name: pf-database
     enabled: true

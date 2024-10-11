@@ -30,9 +30,9 @@ agents:
       # ROLES: "_ws_admin"
       EVENT_COLLECTION_SETTINGS_NAMES: "id0001"
     secret:
-      EXASTRO_USERNAME: "admin"
-      EXASTRO_PASSWORD: "sample-password"
-      # USER_ID: "user01"
+      EXASTRO_REFRESH_TOKEN: "change-this-token"
+      # EXASTRO_USERNAME: "admin"
+      # EXASTRO_PASSWORD: "sample-password"
     resources: {}
       # requests:
       #   memory: "64Mi"
@@ -108,9 +108,19 @@ ingress:
         - path: /
           pathType: ImplementationSpecific
   tls: []
- #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+    # - secretName: chart-example-tls
+    #   hosts:
+    #     - chart-example.local
+  secrets: []
+    # - name: chart-example-tls
+    #   certificate: |-
+    #     -----BEGIN CERTIFICATE-----
+    #     ...
+    #     -----END CERTIFICATE-----
+    #   key: |-
+    #     -----BEGIN PRIVATE KEY-----
+    #     ...
+    #     -----END PRIVATE KEY-----
 
 nodeSelector: {}
 
