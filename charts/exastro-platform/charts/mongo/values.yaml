@@ -37,7 +37,7 @@ image:
   repository: "docker.io/mongo"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "6.0"
+  tag: "6.0.7"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
