@@ -73,7 +73,7 @@ initContainers:
   database:
     image:
       repository: "docker.io/mariadb"
-      tag: "10.9"
+      tag: "10.11.4"
       pullPolicy: IfNotPresent
 
     imagePullSecrets: []

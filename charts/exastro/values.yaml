@@ -461,7 +461,7 @@ exastro-platform:
     enabled: true
     image:
       repository: "docker.io/mariadb"
-      tag: "10.11"
+      tag: "10.11.4"
       pullPolicy: IfNotPresent
     imagePullSecrets: []
     persistence:
@@ -575,7 +575,7 @@ exastro-platform:
       repository: "docker.io/mongo"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
-      tag: "6.0"
+      tag: "6.0.7"
     persistence:
       enabled: true
       accessMode: ReadWriteOnce

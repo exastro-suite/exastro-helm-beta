@@ -15,7 +15,7 @@ initContainerImage:
 
 image:
   repository: "docker.io/mariadb"
-  tag: "10.11"
+  tag: "10.11.4"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
 imagePullSecrets: []
