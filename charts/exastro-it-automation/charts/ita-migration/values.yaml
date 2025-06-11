@@ -78,6 +78,9 @@ extraEnv:
   ORG_MENU_EXPORT_IMPORT_BUFFER_SIZE_DEFAULT: "1000"
   ORG_MENU_EXPORT_IMPORT_BUFFER_SIZE_MAX: "10000"
   ORG_MENU_EXPORT_IMPORT_BUFFER_SIZE_DESCRIPTION: "Maximum buffer size of menu Export/import for Organization default (Used for DB fetch size, file stream read size)"
+  ORG_COMMON_MAINTENANCE_RECORDS_LIMIT_DEFAULT: "10000"
+  ORG_COMMON_MAINTENANCE_RECORDS_LIMIT_MAX: "100000"
+  ORG_COMMON_MAINTENANCE_RECORDS_LIMIT_DESCRIPTION: "Maximum number of maintenance records processing for organization default"
 
 completionCount: 1
 
