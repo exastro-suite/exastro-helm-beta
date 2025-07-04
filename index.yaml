@@ -3,6 +3,39 @@ entries:
   exastro:
   - apiVersion: v2
     appVersion: 2.6.0
+    created: "2025-07-04T05:41:39.680987436Z"
+    dependencies:
+    - condition: exastro-it-automation.enabled
+      name: exastro-it-automation
+      repository: file://../exastro-it-automation
+      version: 2.6.1
+    - condition: exastro-platform.enabled
+      name: exastro-platform
+      repository: file://../exastro-platform
+      version: 1.10.4
+    description: A Helm chart for Exastro. Exastro is an Open Source Framework for
+      digitizing and centrally managing the system configuration.
+    digest: 8b35816db7eab7a9fb9ecc0da3aa61fbcf73ca9c300b146156b96fafe7d77304
+    home: https://www.exastro.org/
+    icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-platform
+    - exastro-it-automation
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro
+    sources:
+    - https://github.com/exastro-suite/exastro-helm
+    - https://github.com/exastro-suite/exastro-it-automation
+    - https://github.com/exastro-suite/exastro-platform
+    type: application
+    urls:
+    - https://github.com/exastro-suite/exastro-helm-beta/releases/download/exastro-1.6.5/exastro-1.6.5.tgz
+    version: 1.6.5
+  - apiVersion: v2
+    appVersion: 2.6.0
     created: "2025-06-19T04:41:17.794688678Z"
     dependencies:
     - condition: exastro-it-automation.enabled
@@ -7258,6 +7291,68 @@ entries:
   exastro-platform:
   - apiVersion: v2
     appVersion: 1.10.0
+    created: "2025-07-04T05:41:39.802633081Z"
+    dependencies:
+    - condition: common.enabled
+      name: common
+      repository: ""
+      version: ^1.x
+    - condition: keycloak.enabled
+      name: keycloak
+      repository: ""
+      version: ^1.x
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: ""
+      version: ^1.x
+    - condition: gitlab.enabled
+      name: gitlab
+      repository: ""
+      version: ^1.x
+    - condition: mongo.enabled
+      name: mongo
+      repository: ""
+      version: ^1.x
+    - condition: platform-api.enabled
+      name: platform-api
+      repository: ""
+      version: ^1.x
+    - condition: platform-auth.enabled
+      name: platform-auth
+      repository: ""
+      version: ^1.x
+    - condition: platform-migration.enabled
+      name: platform-migration
+      repository: ""
+      version: ^1.x
+    - condition: platform-web.enabled
+      name: platform-web
+      repository: ""
+      version: ^1.x
+    - condition: platform-job.enabled
+      name: platform-job
+      repository: ""
+      version: ^1.x
+    description: A Helm chart for Exastro Platform. Exastro Platform is common framework
+      for Exastro suite applications.
+    digest: ec4d55348cc7e20a98d16f85ddae5005acda53047b68e4adc91019206743c668
+    home: https://www.exastro.org/
+    icon: https://www.exastro.org/assets/logo/exastro/Exastro-logomark2-rgb.svg
+    keywords:
+    - exastro
+    - exastro-platform
+    maintainers:
+    - email: contact@exastro.jp.nec.com
+      name: NEC Corporation
+    name: exastro-platform
+    sources:
+    - https://github.com/exastro-suite/exastro-platform
+    type: library
+    urls:
+    - https://github.com/exastro-suite/exastro-helm-beta/releases/download/exastro-platform-1.10.4/exastro-platform-1.10.4.tgz
+    version: 1.10.4
+  - apiVersion: v2
+    appVersion: 1.10.0
     created: "2025-06-17T08:38:24.352168665Z"
     dependencies:
     - condition: common.enabled
@@ -9239,4 +9334,4 @@ entries:
     urls:
     - https://github.com/exastro-suite/exastro-helm/releases/download/exastro-platform-1.3.0/exastro-platform-1.3.0.tgz
     version: 1.3.0
-generated: "2025-06-19T04:41:18.022566024Z"
+generated: "2025-07-04T05:41:39.803103086Z"
