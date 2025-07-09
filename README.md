@@ -20,7 +20,7 @@ helm repo add exastro https://www.exastro.org/exastro-helm/
 | Exastro helm Version   | Tested Version |
 | :-------: | :-------: |
 | **- 1.5.6** | Kubernetes ver.1.23 , 1.26 |
-| **1.6.5** | Kubernetes ver.1.26 , 1.31, 1.33 |
+| **1.6.6** | Kubernetes ver.1.26 , 1.31, 1.33 |
 
 
 
@@ -49,4 +49,4 @@ helm repo add exastro https://www.exastro.org/exastro-helm/
 |    **1.5.4**    |    1.9.0    |   2.5.2   |
 |    **1.5.5**    |    1.9.1    |   2.5.3   |
 |    **1.5.6**    |    1.9.1    |   2.5.4   |
-|    **1.6.5**    |    1.10.0   |   2.6.0   |
+|    **1.6.6**    |    1.10.0   |   2.6.0   |
