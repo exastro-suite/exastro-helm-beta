@@ -41,7 +41,7 @@ data:
       apiVersion: v1
       kind: Pod
       metadata:
-        name: ita-by-ansible-agent-{{`{{ unique_name }}`}}
+        name: {{`{{ unique_name }}`}}
       spec:
         containers:
         - name: ita-by-ansible-agent

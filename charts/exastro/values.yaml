@@ -89,7 +89,7 @@ global:
     config:
       HTTP_PROXY: ""
       HTTPS_PROXY: ""
-      NO_PROXY: "127.0.0.1,localhost,platform-auth,platform-api,ita-api-admin,ita-api-organization,ita-api-oase-receiver,ita-api-ansible-execution-receiver"
+      NO_PROXY: "127.0.0.1,localhost,keycloak,platform-auth,platform-api,ita-api-admin,ita-api-organization,ita-api-oase-receiver,ita-api-ansible-execution-receiver"
 
 exastro-it-automation:
   ita-api-admin:
