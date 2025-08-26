@@ -71,6 +71,7 @@ spec:
         #   - "--bind_ip_all"
         #   - "--replSet"
         #   - "rs0"
+        args: ["mongod", "--config", "{{ .Values.persistence.mountPath.confDir }}/mongod.conf"]
         env:
         - name: TZ
           valueFrom:
