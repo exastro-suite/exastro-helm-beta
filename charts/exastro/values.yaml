@@ -386,9 +386,12 @@ exastro-platform:
 
   platform-auth:
     extraEnv: {}
-    #   # Please set the URL to access
-    #   EXTERNAL_URL: ""
-    #   EXTERNAL_URL_MNG: ""
+      # The following variables, EXTERNAL_URL and EXTERNAL_URL_MNG, are currently deprecated
+      # and are scheduled to be removed in version v2.10.0.
+      # Please use the corresponding variables under `pfGlobalDefinition: config:` instead.
+      #
+      # EXTERNAL_URL: ""
+      # EXTERNAL_URL_MNG: ""
     ingress:
       enabled: true
       hosts:
