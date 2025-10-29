@@ -591,6 +591,9 @@ exastro-platform:
         # release: "pv-mongo"
       matchExpressions:
         # - {key: name, operator: In, values: [pv-mongo]}
+    extraArgs:
+      # - "--config"
+      # - "/etc/mongo/mongod.conf"
     dbSetup:
       dbConfInfo:
         name: mongo-server-conf-config
@@ -599,7 +602,7 @@ exastro-platform:
             verbosity: 0
             # destination: file
             # path: /root/logs/mongod.log
-            timeStampFormat: iso8601-utc
+            # timeStampFormat: iso8601-utc
           # storage:
           #   directoryPerDB: true
           #   dbPath: /root/data
