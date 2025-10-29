@@ -65,6 +65,9 @@ persistence:
     dataDir: /data/db
     confDir: /etc/mongo
 
+args:
+  # - "--config"
+  # - "/etc/mongo/mongod.conf"
 dbSetup:
   dbConfInfo:
     name: mongo-server-conf-config
@@ -183,7 +186,3 @@ readinessProbe:
   initialDelaySeconds: 5
   periodSeconds: 10
   timeoutSeconds: 3
-
-extraArgs:
-  # - "--config"
-  # - "/etc/mongo/mongod.conf/mongod.conf"

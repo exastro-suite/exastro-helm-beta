@@ -66,9 +66,9 @@ spec:
       - name: {{ template "mongo.name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
-        {{- if .Values.extraArgs }}
+        {{- if .Values.args }}
         args:
-        {{- range .Values.extraArgs }}
+        {{- range .Values.args }}
           - {{ . | quote }}
         {{- end }}
         {{- end }}
