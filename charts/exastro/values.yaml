@@ -527,6 +527,7 @@ exastro-platform:
         postgresql['checkpoint_timeout'] = "10min"
         external_url 'http://gitlab:40080'
         nginx['listen_port'] = 40080
+        nginx['listen_https'] = false
         gitlab_rails['initial_root_password'] = "${GITLAB_ROOT_PASSWORD:-}"
         gitlab_rails['registry_enabled'] = false;
         gitlab_rails['db_prepared_statements'] = false;
