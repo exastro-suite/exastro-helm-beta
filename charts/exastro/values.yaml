@@ -574,7 +574,7 @@ exastro-platform:
         echo "GitLab post reconfigure script ended."
     image:
       repository: "docker.io/gitlab/gitlab-ce"
-      tag: "15.11.13-ce.0"
+      tag: "19.5.6-ce.0"
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
     persistence:
