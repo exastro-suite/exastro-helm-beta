@@ -1,6 +1,6 @@
 # exastro-helm
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-![version](https://img.shields.io/badge/version-1.10.1-blue.svg)
+![version](https://img.shields.io/badge/version-1.10.2-blue.svg)
 [![Chart Publish](https://github.com/exastro-suite/exastro-helm/actions/workflows/publish.yml/badge.svg)](https://github.com/exastro-suite/exastro-helm/actions/workflows/publish.yml)
 
 
@@ -58,4 +58,4 @@ helm repo add exastro https://exastro-suite.github.io/exastro-helm/
 |    **1.8.0**    |    1.12.0   |   2.8.0   |
 |    **1.9.0**    |    2.9.0    |   2.9.0   |
 |    **1.10.0**   |    2.10.0   |   2.10.0  |
-|    **1.10.1**   |    2.10.1   |   2.10.1  |
+|    **1.10.2**   |    2.10.1   |   2.10.1  |
